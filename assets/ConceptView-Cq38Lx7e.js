@@ -1,1 +1,0 @@
-import{_ as a,c,o as n,a as o,b as t,N as r,d as _,r as p}from"./index-Bf3rUpyr.js";const d={class:"container concept"},i={__name:"ConceptView",setup(l){return(m,e)=>{const s=p("router-view");return n(),c("div",d,[o(r),e[0]||(e[0]=t("h1",{class:"mb-4"},[_("🗒️"),t("b",null,"Concept Note")],-1)),o(s)])}}},v=a(i,[["__scopeId","data-v-b498b2e7"]]);export{v as default};

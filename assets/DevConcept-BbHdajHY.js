@@ -1,1 +1,0 @@
-import{_ as a,c as r,o as c,a as o,b as t,N as n,r as _}from"./index-Bf3rUpyr.js";const p={class:"container concept"},l={__name:"DevConcept",setup(d){return(i,e)=>{const s=_("router-view");return c(),r("div",p,[o(n),e[0]||(e[0]=t("h1",{class:"mb-4"},[t("b",null,"Portfolio")],-1)),o(s)])}}},v=a(l,[["__scopeId","data-v-5b137bd3"]]);export{v as default};
