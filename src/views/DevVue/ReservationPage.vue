@@ -50,7 +50,8 @@
               <label for="" class="form-label d-block">加料</label>
               <div class="form-check form-check-inline" v-for="(toppings, key) in toppingsType" :key="toppings + key">
                 <input type="checkbox" class="form-check-input" :value="toppings" :id="'toppings' + key"
-                  v-model="selectedItem.toppings">
+                  v-model="selectedItem.toppings"
+                  :disabled="!Object.hasOwn(selectedItem, 'defaults') || selectedItem.defaults.toppings.includes(toppings)">
                 <label :for="'toppings' + key" class="form-check-label">{{ toppings }}</label>
               </div>
             </div>
