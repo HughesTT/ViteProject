@@ -32,7 +32,8 @@
               <label class="form-label d-block">冰塊</label>
               <div class="form-check form-check-inline" v-for="(ice, key) in iceType" :key="'ice' + key">
                 <input type="radio" name="iceType" class="form-check-input" :id="'ice' + key" :value="ice"
-                  v-model="selectedItem.ice">
+                  v-model="selectedItem.ice"
+                  :disabled="!Object.hasOwn(selectedItem, 'defaults') || (selectedItem.defaults.ice !== '' && selectedItem.defaults.ice !== ice)">
                 <label class="form-check-label" :for="'ice' + key">{{ ice }}</label>
               </div>
             </div>
@@ -40,7 +41,8 @@
               <label for="" class="form-label d-block">甜度</label>
               <div class="form-check form-check-inline" v-for="(sugar, key) in sugarType" :key="'sugar' + key">
                 <input type="radio" class="form-check-input" name="sugarType" :value="sugar" :id="'sugar' + key"
-                  v-model="selectedItem.sugar">
+                  v-model="selectedItem.sugar"
+                  :disabled="!Object.hasOwn(selectedItem, 'defaults') || (selectedItem.defaults.sugar !== '' && selectedItem.defaults.sugar !== sugar)">
                 <label :for="'sugar' + key" class="form-check-label">{{ sugar }}</label>
               </div>
             </div>
