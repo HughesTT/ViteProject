@@ -8,23 +8,6 @@ const routes = [
     component:HomeView,
   },
   {
-    path: '/concept',
-    name: 'Concept',
-    component: () => import ('../views/ConceptView.vue'),
-    children: [
-      {
-        path: 'css',
-        name: 'ConceptCSS',
-        component: () => import ('../views/ConceptviewCSS.vue')
-      },
-      {
-        path: 'js',
-        name: 'ConceptJS',
-        component: () => import ('../views/ConceptviewJS.vue')
-      },
-    ]
-  },
-  {
     path: '/devconcept',
     name: 'DevConcept',
     component: () => import ('../views/DevConcept.vue'),
@@ -75,11 +58,6 @@ const routes = [
             component: () => import ( '../views/DevVue/PriceComparison.vue')
           }
         ]
-      },
-      {
-        path: 'js',
-        name: 'DevJS',
-        component: () => import ('../views/DevJS.vue')
       },
     ]
   }
