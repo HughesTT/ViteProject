@@ -1,59 +1,89 @@
 <template>
-  <div class="container">
+  <div class="dev-list-container">
     <div class="row">
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Axios 引用外部資料</h5>
-            <p class="card-text">引用json資料</p>
-            <router-link to="/devconcept/vue/axiosjson" class="linkto">🚀</router-link>
+      <!-- Card 1 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/axiosjson" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">Axios 引用外部資料</h5>
+              <p class="dev-card-text">引用json資料</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Axios結合Props、Emit</h5>
-            <p class="card-text">資料分頁顯示</p>
-            <router-link to="/devconcept/vue/axiospropsemit" class="linkto">🚀</router-link>
+      <!-- Card 2 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/axiospropsemit" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">Axios結合Props、Emit</h5>
+              <p class="dev-card-text">資料分頁顯示</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">To-Do-List</h5>
-            <p class="card-text">資料儲存於瀏覽器</p>
-            <router-link to="/devconcept/vue/todolist" class="linkto">🎯</router-link>
+      <!-- Card 3 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/todolist" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">To-Do-List</h5>
+              <p class="dev-card-text">資料儲存於瀏覽器</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">訂餐系統</h5>
-            <p class="card-text">飲料訂餐系統</p>
-            <router-link to="/devconcept/vue/reservationPage" class="linkto">🚀</router-link>
+      <!-- Card 4 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/reservationPage" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">訂餐系統</h5>
+              <p class="dev-card-text">飲料訂餐系統</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">觀光旅遊</h5>
-            <p class="card-text">資料搜尋</p>
-            <router-link to="/devconcept/vue/leisurefarm" class="linkto">🚀</router-link>
+      <!-- Card 5 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/leisurefarm" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">觀光旅遊</h5>
+              <p class="dev-card-text">資料搜尋</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">比價排序</h5>
-            <p class="card-text">資料搜尋</p>
-            <router-link to="/devconcept/vue/pricecomparison" class="linkto">🚀</router-link>
+      <!-- Card 6 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/pricecomparison" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">比價排序</h5>
+              <p class="dev-card-text">資料搜尋</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -64,90 +94,55 @@
 </script>
 
 <style lang="scss" scoped>
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-
-.container {
-  padding-bottom: 3em;
+.dev-list-container {
+  padding: 2rem 1rem;
+  background-color: #f4f7f6; // 柔和的背景色
 }
 
-.concept-content {
-  margin-top: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.dev-card-link {
+  text-decoration: none;
+  display: block;
+  margin-bottom: 1.5rem;
+}
 
-  .concept-icon {
-    font-size: 2rem;
-    color: #799f44;
-    margin-top: 10px;
-  }
+.dev-card {
+  background-color: #ffffff;
+  border-radius: 12px; // 更大的圓角
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // 更柔和的陰影
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid transparent; // 避免 hover 時跳動
 
-  .concept-question {
-    h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 10px;
-    }
-  }
-
-  .concept-answer {
-    p {
-      font-size: 1rem;
-      color: #555;
-      line-height: 1.5;
-    }
-
-    .concept-tips {
-      color: #337ab7;
-      margin-top: 10px;
-      font-style: italic;
-      font-weight: bold;
-    }
+  &:hover {
+    transform: translateY(-5px); // 向上浮動效果
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   }
 }
 
-.devcard {
-  margin-top: 20px;
-  margin-bottom: 5px;
-
-  .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .card-body {
-      padding: 15px;
-
-      .card-title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      .card-text {
-        font-size: 1rem;
-        color: #555;
-        line-height: 1.5;
-        margin-bottom: 15px;
-      }
-
-      .linkto {
-        font-size: 1.5rem;
-        text-decoration: none;
-
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-    }
+.dev-card-content {
+  .dev-card-title {
+    font-size: 1.1rem;
+    font-weight: 600; // 適中的字重
+    color: #2c3e50; // 深灰藍
+    margin: 0 0 0.25rem 0;
   }
+
+  .dev-card-text {
+    font-size: 0.9rem;
+    color: #7f8c8d; // 中性灰色
+    margin: 0;
+  }
+}
+
+.dev-card-icon span {
+  font-size: 1.75rem;
+  transition: transform 0.3s ease;
+}
+
+.dev-card-link:hover .dev-card-icon span {
+  transform: scale(1.2); // 圖示放大效果
 }
 </style>
