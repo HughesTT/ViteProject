@@ -2,9 +2,10 @@
   <div class="database">
     <Loading v-model:active="isLoading" />
     <div class="row justify-content-end search-bar">
-      <form class="d-flex col-4">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="searchTerm">
-        <button class="btn btn-outline-success" type="submit" @click.prevent="filterData"
+      <form class="d-flex col-auto">
+        <input v-if="!searchCache" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+          v-model="searchTerm">
+        <button v-if="!searchCache" class="btn btn-outline-success" type="submit" @click.prevent="filterData"
           @keydown="filterData">Search</button>
         <button class="btn btn-outline-secondary ms-2" type="button" @click="clearSearch">Clear</button>
       </form>
@@ -12,7 +13,7 @@
     <div class="row">
       <p v-if="searchCache">搜尋關鍵字: {{ searchCache }}</p>
       <p>全部資料共 {{ filteredDataCount }} 筆，目前第 <span class="currentPageCount">{{ currentPage
-      }}</span> 頁</p>
+          }}</span> 頁</p>
       <div class="col-md-5 data-card" v-for="item in paginatedData" :key="item._id">
         <div class="card-img">
           <img :src="item.Photolink" class="card-img img-fluid" alt="">
@@ -36,8 +37,8 @@ import Loading from 'vue-loading-overlay'
 const isLoading = ref(false)
 const allData = ref([])
 const newData = ref([])
-const searchTerm = ref('')
-const searchCache = ref('')
+const searchTerm = ref('') // 雙向綁定搜尋輸入框
+const searchCache = ref('') // 儲存搜尋關鍵字
 const itemsPerPage = 10
 const currentPage = ref(1)
 const filteredDataCount = ref(0)

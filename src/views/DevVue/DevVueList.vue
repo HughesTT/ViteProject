@@ -4,15 +4,6 @@
       <div class="devcard col-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">To-Do-List</h5>
-            <p class="card-text">資料儲存於瀏覽器</p>
-            <router-link to="/devconcept/vue/todolist" class="linkto">🎯</router-link>
-          </div>
-        </div>
-      </div>
-      <div class="devcard col-4">
-        <div class="card">
-          <div class="card-body">
             <h5 class="card-title">Axios 引用外部資料</h5>
             <p class="card-text">引用json資料</p>
             <router-link to="/devconcept/vue/axiosjson" class="linkto">🚀</router-link>
@@ -31,6 +22,15 @@
       <div class="devcard col-4">
         <div class="card">
           <div class="card-body">
+            <h5 class="card-title">To-Do-List</h5>
+            <p class="card-text">資料儲存於瀏覽器</p>
+            <router-link to="/devconcept/vue/todolist" class="linkto">🎯</router-link>
+          </div>
+        </div>
+      </div>
+      <div class="devcard col-4">
+        <div class="card">
+          <div class="card-body">
             <h5 class="card-title">訂餐系統</h5>
             <p class="card-text">飲料訂餐系統</p>
             <router-link to="/devconcept/vue/reservationPage" class="linkto">🚀</router-link>
@@ -43,6 +43,15 @@
             <h5 class="card-title">觀光旅遊</h5>
             <p class="card-text">資料搜尋</p>
             <router-link to="/devconcept/vue/leisurefarm" class="linkto">🚀</router-link>
+          </div>
+        </div>
+      </div>
+      <div class="devcard col-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">比價排序</h5>
+            <p class="card-text">資料搜尋</p>
+            <router-link to="/devconcept/vue/pricecomparison" class="linkto">🚀</router-link>
           </div>
         </div>
       </div>

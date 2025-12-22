@@ -68,6 +68,11 @@ const routes = [
             path: 'leisurefarm',
             name: 'LeisureFarm',
             component: () => import ( '../views/DevVue/LeisureFarm.vue')
+          },
+          {
+            path: 'pricecomparison',
+            name: 'PriceComparison',
+            component: () => import ( '../views/DevVue/PriceComparison.vue')
           }
         ]
       },
