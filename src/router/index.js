@@ -57,6 +57,12 @@ const routes = [
             name: 'PriceComparison',
             component: () => import ( '../views/DevVue/PriceComparison.vue')
           },
+          
+          {
+            path: 'pricecomparisonactivesort',
+            name: 'PriceComparisonActiveSort',
+            component: () => import ( '../views/DevVue/PriceComparisonActiveSort.vue')
+          },
           {
             path: 'loginpage',
             name: 'LoginPage',

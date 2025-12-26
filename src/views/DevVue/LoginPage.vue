@@ -3,13 +3,12 @@
     <h1>登入</h1>
     <div class="row col-md-4 mx-auto">
       <div class="mb-3">
-        <label for="" class="form-label">UserName</label>
-        <input v-model="username" type="text" class="form-control" id="" placeholder="admin" @keydown.enter="login" />
+        <label for="" class="form-label">UserName<br> (admin)</label>
+        <input v-model="username" type="text" class="form-control" id="" placeholder="" @keydown.enter="login" />
       </div>
       <div class="mb-3">
-        <label for="" class="form-label">Password</label>
-        <input v-model="password" type="password" class="form-control" id="" placeholder="1234 or 0000"
-          @keydown.enter="login" />
+        <label for="" class="form-label">Password<br> (1234或0000)</label>
+        <input v-model="password" type="password" class="form-control" id="" placeholder="" @keydown.enter="login" />
       </div>
       <div class="d-grid gap-2">
         <button @click="login" class="btn btn-warning" type="button">登入</button>

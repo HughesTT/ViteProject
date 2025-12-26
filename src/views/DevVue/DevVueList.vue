@@ -85,6 +85,20 @@
           </div>
         </router-link>
       </div>
+      <!-- Card 6-1 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/pricecomparisonactivesort" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">比價排序(排序顯示加強提示)</h5>
+              <p class="dev-card-text">資料搜尋</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
       <!-- Card 7 -->
       <div class="col-md-6 col-lg-4">
         <router-link to="/devconcept/vue/loginpage" class="dev-card-link">
