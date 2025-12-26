@@ -34,6 +34,8 @@ const login = () => {
   } else {
     showToast('帳號或密碼錯誤', 'error')
   }
+  username.value = ''
+  password.value = ''
 }
 </script>
 
