@@ -56,6 +56,11 @@ const routes = [
             path: 'pricecomparison',
             name: 'PriceComparison',
             component: () => import ( '../views/DevVue/PriceComparison.vue')
+          },
+          {
+            path: 'loginpage',
+            name: 'LoginPage',
+            component: () => import ( '../views/DevVue/LoginPage.vue')
           }
         ]
       },

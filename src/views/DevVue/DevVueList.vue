@@ -85,6 +85,20 @@
           </div>
         </router-link>
       </div>
+      <!-- Card 7 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/loginpage" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">ToastMessage</h5>
+              <p class="dev-card-text">狀態訊息推播</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

@@ -1,10 +1,11 @@
 <script setup>
-
+import ToastPage from './components/ToastPage.vue';
 </script>
 
 <template>
   <div>
     <router-view></router-view>
+    <ToastPage />
   </div>
 </template>
 
