@@ -67,6 +67,11 @@ const routes = [
             path: 'loginpage',
             name: 'LoginPage',
             component: () => import ( '../views/DevVue/LoginPage.vue')
+          },
+          {
+            path: 'currencyconverter',
+            name: 'CurrencyConverter',
+            component: () => import ( '../views/DevVue/CurrencyConverter.vue')
           }
         ]
       },

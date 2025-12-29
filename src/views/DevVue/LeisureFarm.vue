@@ -13,7 +13,7 @@
     <div class="row">
       <p v-if="searchCache">搜尋關鍵字: {{ searchCache }}</p>
       <p>全部資料共 {{ filteredDataCount }} 筆，目前第 <span class="currentPageCount">{{ currentPage
-          }}</span> 頁</p>
+      }}</span> 頁</p>
       <div class="col-md-5 data-card" v-for="item in paginatedData" :key="item._id">
         <div class="card-img">
           <img :src="item.Photolink" class="card-img img-fluid" alt="">
@@ -62,6 +62,7 @@ onMounted(() => {
 const filterData = () => {
   console.log('searching for:', searchTerm.value)
   isLoading.value = true
+  currentPage.value = 1 // 若目前不在第 1 頁，搜尋後會看不到結果，需重置到第 1 頁
   if (searchTerm.value.trim() === '') {
     allData.value = LeisureFarm
     return
@@ -105,6 +106,7 @@ const clearSearch = () => {
   searchCache.value = ''
   newData.value = []
   allData.value = LeisureFarm
+  currentPage.value = 1 // 重置目前頁面到第 1 頁
 }
 </script>
 
