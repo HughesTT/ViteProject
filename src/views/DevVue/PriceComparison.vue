@@ -3,18 +3,18 @@
     <h1>Price Comparison</h1>
     <div class="main rounded">
       <div class="button-group d-flex justify-content-center">
-        <button class="vegetablesBtn btn btn-type border-dark border-2" @click="filterData('N04')">Vegetables</button>
-        <button class="fruitsBtn btn btn-type border-dark border-2" @click="filterData('N05')">Fruits</button>
-        <button class="flowersBtn btn btn-type border-dark border-2" @click="filterData('N06')">Flowers</button>
+        <button class="vegetablesBtn btn btn-type border-dark border-2" @click="filterData('N04')">蔬菜</button>
+        <button class="fruitsBtn btn btn-type border-dark border-2" @click="filterData('N05')">水果</button>
+        <button class="flowersBtn btn btn-type border-dark border-2" @click="filterData('N06')">花卉</button>
       </div>
       <div class="search-group d-flex flex-column flex-md-row">
         <div class="crop-input d-flex mb-2">
           <label for="crop" class="rounded-start text-white">作物名稱</label>
-          <input type="text" class="rounded-end" placeholder="input product name" id="crop" name="crop"
-            v-model="searchTerm" @keydown="searchData">
+          <input type="text" class="rounded-end" placeholder="輸入作物名稱" id="crop" name="crop" v-model="searchTerm"
+            @keydown="searchData">
         </div>
-        <button class="search text-white btn mb-2 ms-2" @click="searchData">Search</button>
-        <button class="reset btn btn-type border-1 mb-2 ms-2" @click="resetData">Reset</button>
+        <button class="search text-white btn mb-2 ms-2" @click="searchData">搜尋</button>
+        <button class="reset btn btn-type border-1 mb-2 ms-2" @click="resetData">重新設定</button>
       </div>
 
       <div class="sort-content d-flex justify-content-md-between justify-content-center">

@@ -4,20 +4,35 @@
     <p class="mb-4">即時匯率換算 </p>
     <div class="row">
       <div class="col-2">
-        <div>台幣 TWD<input class="form-control me-2" type="text" v-model="twd" @keyup="convertFromTWD"></div>
+        <div>
+          <img src="https://cdn-icons-png.flaticon.com/128/5373/5373308.png" alt="" class="countryimg">
+          台幣 TWD<input class="form-control me-2" type="text" v-model="twd" @keyup="convertFromTWD">
+        </div>
       </div>
       <div class="col-3">
-        <div>日幣 JPY <input class="form-control me-2 mb-3" type="text" v-model="jpy"></div>
-        <div>美金 USD <input class="form-control me-2 mb-3" type="text" v-model="usd"></div>
-        <div>歐元 EUR <input class="form-control me-2 mb-3" type="text" v-model="eur"></div>
-        <div>韓元 KRW <input class="form-control me-2 mb-3" type="text" v-model="krw"></div>
+        <div>
+          <img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="" class="countryimg"> 日幣 JPY <input
+            class="form-control me-2 mb-3" type="text" v-model="jpy">
+        </div>
+        <div>
+          <img src="https://cdn-icons-png.flaticon.com/128/323/323310.png" alt="" class="countryimg"> 美金 USD <input
+            class="form-control me-2 mb-3" type="text" v-model="usd">
+        </div>
+        <div>
+          <img src="https://cdn-icons-png.flaticon.com/512/3840/3840766.png" alt="" class="countryimg"> 歐元 EUR <input
+            class="form-control me-2 mb-3" type="text" v-model="eur">
+        </div>
+        <div>
+          <img src="https://cdn-icons-png.flaticon.com/128/5111/5111586.png" alt="" class="countryimg"> 韓元 KRW <input
+            class="form-control me-2 mb-3" type="text" v-model="krw">
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
 import axios from 'axios'
 
 const exchangeUrl = 'https://open.er-api.com/v6/latest/TWD'
@@ -53,4 +68,10 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.countryimg {
+  width: 20px;
+  height: auto;
+  margin-right: 5px;
+}
+</style>

@@ -119,7 +119,7 @@
           <div class="dev-card">
             <div class="dev-card-content">
               <h5 class="dev-card-title">CurrencyConverter</h5>
-              <p class="dev-card-text">匯率轉換器</p>
+              <p class="dev-card-text">即時匯率換算</p>
             </div>
             <div class="dev-card-icon">
               <span>🚀</span>

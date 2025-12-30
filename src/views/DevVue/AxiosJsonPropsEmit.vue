@@ -1,14 +1,6 @@
 <template>
   <div>
-    <h3>Axios引用資料，以Props、Emit傳遞資料分頁顯示</h3>
-    <p>子元件 AxiosJsonPaginationControls.vue (Component資料夾下)</p>
-    <div>
-      <ul>
-        <li>父元件作為資料管理者，由它來發送axios請求，並將其渲染到畫面上</li>
-        <li>引用子元件AxiosJsonPaginationControls.vue做分頁顯示，定義Props、Emit
-        </li>
-      </ul>
-    </div>
+    <h3>資料分頁顯示</h3>
     <div class="database">
       <div class="row">
         <div class="col-md-5 data-card" v-for="item in paginatedData" :key="item._id">
