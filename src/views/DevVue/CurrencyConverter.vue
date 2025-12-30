@@ -3,13 +3,13 @@
   <div>
     <p class="mb-4">即時匯率換算 </p>
     <div class="row">
-      <div class="col-2">
+      <div class="col-md-2">
         <div>
           <img src="https://cdn-icons-png.flaticon.com/128/5373/5373308.png" alt="" class="countryimg">
           台幣 TWD<input class="form-control me-2" type="text" v-model="twd" @keyup="convertFromTWD">
         </div>
       </div>
-      <div class="col-3">
+      <div class="col-md-3">
         <div>
           <img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="" class="countryimg"> 日幣 JPY <input
             class="form-control me-2 mb-3" type="text" v-model="jpy">
