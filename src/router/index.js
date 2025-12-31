@@ -72,10 +72,20 @@ const routes = [
             path: 'currencyconverter',
             name: 'CurrencyConverter',
             component: () => import ( '../views/DevVue/CurrencyConverter.vue')
+          },
+          {
+            path: 'restfulapi',
+            name: 'RESTfulAPI',
+            component: () => import ( '../views/DevVue/RESTfulAPI.vue')
           }
         ]
       },
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404page',
+    component: () => import('../views/DevVue/404Page.vue'),
   }
 ]
 

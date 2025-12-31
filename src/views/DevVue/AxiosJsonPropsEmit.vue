@@ -31,7 +31,6 @@ const fetchData = () => { // 使用 axios 獲取全部資料
   axios.get(jsonUrl)
     .then(res => {
       allData.value = res.data.result.records
-      console.log(allData.value)
     })
     .catch(error => {
       console.error('Error fetching data:', error)

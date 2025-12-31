@@ -108,7 +108,6 @@ const fetchData = () => {
   axios.get(apiUrl)
     .then(res => {
       allData.value = res.data
-      console.log(allData.value)
     })
     .catch(err => {
       console.error(err)

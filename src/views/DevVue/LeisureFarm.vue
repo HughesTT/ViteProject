@@ -48,7 +48,6 @@ const totalPages = computed(() => {
   } else {
     filteredDataCount.value = allData.value.length
   }
-  console.log('Data Count', filteredDataCount.value)
   return Math.ceil(filteredDataCount.value / itemsPerPage)
 })
 onMounted(() => {
@@ -60,7 +59,6 @@ onMounted(() => {
 })
 // 篩選資料函式
 const filterData = () => {
-  console.log('searching for:', searchTerm.value)
   isLoading.value = true
   currentPage.value = 1 // 若目前不在第 1 頁，搜尋後會看不到結果，需重置到第 1 頁
   if (searchTerm.value.trim() === '') {
