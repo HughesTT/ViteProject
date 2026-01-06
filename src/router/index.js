@@ -77,6 +77,11 @@ const routes = [
             path: 'restfulapi',
             name: 'RESTfulAPI',
             component: () => import ( '../views/DevVue/RESTfulAPI.vue')
+          },
+          {
+            path: 'validate',
+            name: 'Validate',
+            component: () => import ( '../views/DevVue/ValidatePage.vue')
           }
         ]
       },

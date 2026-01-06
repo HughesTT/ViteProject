@@ -34,7 +34,7 @@
         <router-link to="/devconcept/vue/restfulapi" class="dev-card-link">
           <div class="dev-card">
             <div class="dev-card-content">
-              <h5 class="dev-card-title">RESTful API</h5>
+              <h5 class="dev-card-title">RESTful API (GET)</h5>
               <p class="dev-card-text">資料交換</p>
             </div>
             <div class="dev-card-icon">
@@ -134,6 +134,20 @@
             <div class="dev-card-content">
               <h5 class="dev-card-title">CurrencyConverter</h5>
               <p class="dev-card-text">即時匯率換算</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
+      <!-- Card 8 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/validate" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">Validate</h5>
+              <p class="dev-card-text">資料驗證</p>
             </div>
             <div class="dev-card-icon">
               <span>🚀</span>
