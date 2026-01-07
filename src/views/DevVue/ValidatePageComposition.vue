@@ -62,12 +62,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import { required, email, min } from '@vee-validate/rules'
 import { localize } from '@vee-validate/i18n'
 import en from '@vee-validate/i18n/dist/locale/en.json'
 import zh_TW from '@vee-validate/i18n/dist/locale/zh_TW.json'
+import { ref } from 'vue';
 
 // 定義使用的規則
 defineRule('required', required)
@@ -76,7 +77,10 @@ defineRule('min', min)
 
 // 定義 checkbox 驗證規則（必須勾選）
 defineRule('accepted', (value) => {
-  return value === true || value === 'true'
+  if (value === true || value === 'true') {
+    return true
+  }
+  return false
 })
 
 // 取得動態傳入country欄位的值
@@ -84,7 +88,10 @@ defineRule('phone', (value, [country]) => {
   const phoneRegex = country === 'Taiwan' ? /^\d{10}$/ : /^\d{11}$/
   // USA: /^(\+1|0)[789]0-\d{4}-\d{4}$/, // 美國手機號碼格式
   // Taiwan: /^(\+886|0)9\d{2}-?\d{3}-?\d{3}$/ // 台灣手機號碼格式
-  return phoneRegex.test(value)
+  if (phoneRegex.test(value)) {
+    return true
+  }
+  return false
 })
 
 configure({
@@ -113,36 +120,23 @@ configure({
 
 localize('zh_TW')
 
-export default {
-  data() {
-    return {
-      countries: [
-        { value: 'USA', name: 'USA' },
-        { value: 'Taiwan', name: 'Taiwan' }
-      ],
-      showPassword: false,
-      errors: {}
-    }
-  },
-  methods: {
-    updateLanguage(languageVal) {
-      localize(languageVal)
-      this.$refs.form.validate()
-    },
-    onFormSubmit(values) {
-      console.log('Form Submitted:', values)
-      alert('Sign up successful!')
-      this.$refs.form.resetForm()
-    },
-    togglePassword() {
-      this.showPassword = !this.showPassword
-    },
-  },
-  components: {
-    Form,
-    Field,
-    ErrorMessage
-  },
+const form = ref(null)
+const countries = [
+  { value: 'USA', name: 'USA' },
+  { value: 'Taiwan', name: 'Taiwan' }
+]
+const showPassword = ref(false)
+const updateLanguage = (languageVal) => {
+  localize(languageVal)
+  form.value.validate()
+}
+const onFormSubmit = (values) => {
+  console.log('Form Submitted:', values)
+  alert('Sign up successful!')
+  form.value.resetForm()
+}
+const togglePassword = () => {
+  showPassword.value = !showPassword.value
 }
 </script>
 

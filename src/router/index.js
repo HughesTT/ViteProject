@@ -82,6 +82,11 @@ const routes = [
             path: 'validate',
             name: 'Validate',
             component: () => import ( '../views/DevVue/ValidatePage.vue')
+          },
+          {
+            path: 'validatecomposition',
+            name: 'ValidateComposition',
+            component: () => import ( '../views/DevVue/ValidatePage.vue')
           }
         ]
       },

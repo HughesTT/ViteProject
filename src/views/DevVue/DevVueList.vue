@@ -141,13 +141,13 @@
           </div>
         </router-link>
       </div>
-      <!-- Card 8 -->
+      <!-- Card 9 -->
       <div class="col-md-6 col-lg-4">
-        <router-link to="/devconcept/vue/validate" class="dev-card-link">
+        <router-link to="/devconcept/vue/validatecomposition" class="dev-card-link">
           <div class="dev-card">
             <div class="dev-card-content">
-              <h5 class="dev-card-title">Validate</h5>
-              <p class="dev-card-text">資料驗證</p>
+              <h5 class="dev-card-title">資料驗證</h5>
+              <p class="dev-card-text">Vee-validate</p>
             </div>
             <div class="dev-card-icon">
               <span>🚀</span>
