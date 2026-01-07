@@ -7,9 +7,7 @@
           <button @click.prevent="updateLanguage('zh_TW')" class="btn btn-success mr-2" type="button">zh_TW</button>
           <button @click.prevent="updateLanguage('en')" class="btn btn-danger mr-2" type="button">EN</button>
         </div>
-        <Form ref="form" class="form" @submit="onFormSubmit" v-slot="{ values, errors }">
-          Error: {{ errors }} <br />
-          Values: {{ values }} <br /><br />
+        <Form ref="form" class="form" @submit="onFormSubmit">
           <div class="mb-3">
             <label for="username" class="form-label">username</label>
             <Field name="username" id="username" placeholder="your name" rules="required" type="text"
@@ -76,6 +74,7 @@ defineRule('email', email)
 defineRule('min', min)
 
 // 定義 checkbox 驗證規則（必須勾選）
+// 同意條款accepted 規則：值必須為 true 或 'true'
 defineRule('accepted', (value) => {
   if (value === true || value === 'true') {
     return true
@@ -115,26 +114,35 @@ configure({
       }
     }
   }),
-  validateOnInput: true
+  validateOnInput: true // 輸入時即時驗證
 })
 
-localize('zh_TW')
+localize('zh_TW') // 設定預設語系
 
-const form = ref(null)
+const form = ref(null) // 取得 Form 元件的參考
+
+// 國家選項
 const countries = [
   { value: 'USA', name: 'USA' },
   { value: 'Taiwan', name: 'Taiwan' }
 ]
-const showPassword = ref(false)
+
+const showPassword = ref(false) // 控制密碼顯示與隱藏的狀態
+
+// 更換語系
 const updateLanguage = (languageVal) => {
   localize(languageVal)
   form.value.validate()
 }
+
+// 送出表單函式
 const onFormSubmit = (values) => {
   console.log('Form Submitted:', values)
   alert('Sign up successful!')
   form.value.resetForm()
 }
+
+// 切換密碼顯示狀態函式
 const togglePassword = () => {
   showPassword.value = !showPassword.value
 }
