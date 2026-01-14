@@ -7,7 +7,9 @@
           <button @click.prevent="updateLanguage('zh_TW')" class="btn btn-success mr-2" type="button">zh_TW</button>
           <button @click.prevent="updateLanguage('en')" class="btn btn-danger mr-2" type="button">EN</button>
         </div>
-        <Form ref="form" class="form" @submit="onFormSubmit">
+        <Form ref="form" class="form" @submit="onFormSubmit" v-slot="{ values, errors }">
+          Error: {{ errors }} <br />
+          Values: {{ values }} <br /><br />
           <div class="mb-3">
             <label for="username" class="form-label">username</label>
             <Field name="username" id="username" placeholder="your name" rules="required" type="text"
@@ -32,7 +34,7 @@
           </div>
           <div class="mb-3">
             <label for="phone" class="form-label">phone</label>
-            <Field name="phone" id="phone" placeholder="phone number" :rules="{ required: true, phone: values.country }"
+            <Field name="phone" id="phone" placeholder="phone number" :rules="phoneRules(values)"
               class="form-control" />
             <ErrorMessage name="phone" class="error-message" />
           </div>
@@ -128,6 +130,14 @@ const countries = [
 ]
 
 const showPassword = ref(false) // 控制密碼顯示與隱藏的狀態
+
+// 動態 phone 驗證規則函數
+const phoneRules = (values) => {
+  return {
+    required: true,
+    phone: values?.country || '' // 傳入 country 欄位的值
+  }
+}
 
 // 更換語系
 const updateLanguage = (languageVal) => {
