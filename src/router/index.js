@@ -92,6 +92,11 @@ const routes = [
             path: 'piniapage',
             name: 'PiniaPage',
             component: () => import ( '../views/DevVue/PiniaPage.vue')
+          },
+          {
+            path: 'piniapagec',
+            name: 'PiniaPageComposition',
+            component: () => import ( '../views/DevVue/PiniaPageC.vue')
           }
         ]
       },

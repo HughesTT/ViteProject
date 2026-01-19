@@ -1,7 +1,7 @@
 <template>
   <Loading :active="isLoading"></Loading>
   <div class="container">
-    <h1>Pinia (Option API)</h1>
+    <h1>Pinia (Composition API)</h1>
     <div class="row mt-4">
       <div class="col-md-7">
         <table class="table align-middle">
@@ -86,40 +86,34 @@
   </div>
 </template>
 
-<script>
-import { mapState, mapActions } from 'pinia' // Pinia 的輔助函式，可帶入 store 狀態和方法
-import statusStore from '../../store/statusStore'
-import cartStore from '../../store/cartStore'
-import productStore from '../../store/productStore'
+<script setup>
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useStatusStore } from '../../store/statusStoreC'
+import { useProductStore } from '../../store/productStoreC'
+import { useCartStore } from '../../store/cartStoreC'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 
-export default {
-  components: {
-    Loading
-  },
-  data() {
-    return {
+// 初始化 store
+const statusStoreInstance = useStatusStore()
+const productStoreInstance = useProductStore()
+const cartStoreInstance = useCartStore()
 
-    }
-  },
-  computed: {
-    ...mapState(productStore, ['sortProducts']),
-    ...mapState(statusStore, ['isLoading', 'cartLoadingItem']),
-    ...mapState(cartStore, ['cart']),
-  },
-  methods: {
-    ...mapActions(productStore, ['getProducts']),
-    ...mapActions(
-      cartStore, ['addToCart', 'getCart', 'updateCart', 'removeCartItem']
-    )
-  },
-  created() {
-    this.getProducts()
-    this.getCart()
-  }
-}
+// 使用 storeToRefs 解構 state 和 getters，以便在元件中使用
+const { isLoading, cartLoadingItem } = storeToRefs(statusStoreInstance)
+const { cart } = storeToRefs(cartStoreInstance)
+const { sortProducts } = storeToRefs(productStoreInstance)
 
+// 解構 actions (不需要 storeToRefs，因為方法本身不需要響應)
+const { getProducts } = productStoreInstance
+const { addToCart, getCart, updateCart, removeCartItem } = cartStoreInstance
+
+// 在元件掛載時取得產品和購物車資料
+onMounted(() => {
+  getProducts()
+  getCart()
+})
 </script>
 
 <style lang="scss">

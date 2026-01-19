@@ -1,15 +1,21 @@
 <template>
   <div class="container pb-5">
     <h3>Validate</h3>
+    <div class="mb-3">
+      <button @click.prevent="updateLanguage('zh_TW')" class="btn btn-success mr-2" type="button">zh_TW</button>
+      <button @click.prevent="updateLanguage('en')" class="btn btn-danger mr-2" type="button">EN</button>
+    </div>
     <div class="row mt-4">
-      <div class="col-4">
-        <div class="mb-3">
-          <button @click.prevent="updateLanguage('zh_TW')" class="btn btn-success mr-2" type="button">zh_TW</button>
-          <button @click.prevent="updateLanguage('en')" class="btn btn-danger mr-2" type="button">EN</button>
+      <Form ref="form" class="form" @submit="onFormSubmit" v-slot="{ values, errors }">
+        <div class="col-md-4">
+          <div class="tips">
+            Error: <br />
+            <pre>{{ errors }}</pre>
+            Values: <br />
+            <pre>{{ values }}</pre>
+          </div>
         </div>
-        <Form ref="form" class="form" @submit="onFormSubmit" v-slot="{ values, errors }">
-          Error: {{ errors }} <br />
-          Values: {{ values }} <br /><br />
+        <div class="col-md-3">
           <div class="mb-3">
             <label for="username" class="form-label">username</label>
             <Field name="username" id="username" placeholder="your name" rules="required" type="text"
@@ -56,8 +62,8 @@
             <ErrorMessage name="check" class="error-message" />
           </div>
           <button class="btn btn-secondary">Sign up</button>
-        </Form>
-      </div>
+        </div>
+      </Form>
     </div>
   </div>
 </template>
@@ -175,6 +181,26 @@ const togglePassword = () => {
 
   button {
     margin-right: 10px;
+  }
+
+  .tips {
+    position: absolute;
+    background: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    z-index: 1000;
+    margin-left: 23%;
+
+    pre {
+      width: 310px;
+      background: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
   }
 }
 </style>
