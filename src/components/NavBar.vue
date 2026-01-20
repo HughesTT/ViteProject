@@ -12,12 +12,13 @@
             <li class="nav-item dropdown">
               <router-link class="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                Portfolio
+                Vue Concept
               </router-link>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><router-link class="dropdown-item" to="/devconcept/vue">Vue</router-link></li>
+                <li><router-link class="dropdown-item" to="/devconcept/vue">Basic</router-link></li>
               </ul>
             </li>
+            <li><router-link class="nav-link" to="/boardpage">Kanban Board</router-link></li>
           </ul>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="container concept">
     <NavBar />
-    <h1 class="mb-4"><b>Portfolio</b></h1>
+    <h1 class="mb-4"><b>Basic</b></h1>
     <router-view></router-view>
   </div>
 </template>

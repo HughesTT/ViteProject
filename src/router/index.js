@@ -98,6 +98,11 @@ const routes = [
     ]
   },
   {
+    path: '/boardpage',
+    name: 'BoardPage',
+    component: () => import ('../views/DevVue/KanbanBoard/BoardPage.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: '404page',
     component: () => import('../views/DevVue/404Page.vue'),
