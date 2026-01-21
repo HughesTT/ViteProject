@@ -18,7 +18,6 @@
                 <li><router-link class="dropdown-item" to="/devconcept/vue">Basic</router-link></li>
               </ul>
             </li>
-            <li><router-link class="nav-link" to="/boardpage">Kanban Board</router-link></li>
           </ul>
         </div>
       </div>

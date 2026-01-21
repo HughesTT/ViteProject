@@ -169,6 +169,20 @@
           </div>
         </router-link>
       </div>
+      <!-- Card 12 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/boardpage" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">KanbanBoard</h5>
+              <p class="dev-card-text"></p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
