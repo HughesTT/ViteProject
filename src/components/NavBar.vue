@@ -18,6 +18,7 @@
                 <li><router-link class="dropdown-item" to="/devconcept/vue">Basic</router-link></li>
               </ul>
             </li>
+            <li><router-link to="/prototypealpha" class=" nav-link">Prototype Alpha</router-link></li>
           </ul>
         </div>
       </div>

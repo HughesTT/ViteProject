@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mb-4">Vue</h2>
+  <h2 class="mb-4"></h2>
   <DevVueList />
 </template>
 

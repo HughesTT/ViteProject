@@ -175,7 +175,7 @@
           <div class="dev-card">
             <div class="dev-card-content">
               <h5 class="dev-card-title">KanbanBoard</h5>
-              <p class="dev-card-text"></p>
+              <p class="dev-card-text">簡易版型架構</p>
             </div>
             <div class="dev-card-icon">
               <span>🚀</span>

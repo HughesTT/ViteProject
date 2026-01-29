@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import MainBoard from '../views/DevVue/prototypeAlpha/mainBoard.vue'
 
 const routes = [
   {
@@ -98,9 +99,14 @@ const routes = [
     ]
   },
   {
-    path: '/boardpage',
-    name: 'BoardPage',
-    component: () => import ('../views/DevVue/KanbanBoard/BoardPage.vue'),
+    path: '/prototypealpha',
+    name: 'PrototypeAlphaLogin',
+    component: () => import ('../views/DevVue/PrototypeAlpha/LoginPage.vue')
+  },
+  {
+    path: '/prototypealpha/board',
+    name: 'PrototypeAlphaBoard',
+    component: () => import ('../views/DevVue/PrototypeAlpha/BoardView.vue')
   },
   {
     path: '/:pathMatch(.*)*',
