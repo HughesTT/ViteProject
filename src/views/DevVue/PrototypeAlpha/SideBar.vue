@@ -12,7 +12,7 @@
           @click.prevent="selectItem('A')">Member
           Info</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'B' }"
-          @click.prevent="selectItem('B')">Item 2</a></li>
+          @click.prevent="selectItem('B')">Add New Item</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'C' }"
           @click.prevent="selectItem('C')">Item 3</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'D' }"
@@ -25,9 +25,8 @@
 </template>
 
 <script setup>
-import { defineEmits, ref } from 'vue' // 引用 defineEmits
+import { ref } from 'vue'
 import { useRouter } from 'vue-router' // 引用 Vue Router
-import { defineProps } from 'vue'
 import { useToast } from '../../../composables/useToast.js' // 引入 useToast
 const { showToast } = useToast() // 取得 showToast 函式
 
@@ -44,7 +43,6 @@ const isActive = ref(null) // 目前選取的內容
 const selectItem = (item) => {
   isActive.value = item
   emit('selectContent', item)
-  console.log('選取的內容:', item)
 }
 
 const logout = () => {

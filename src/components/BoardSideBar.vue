@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import { defineEmits } from 'vue' // 引入 defineEmits
 defineEmits(['selectContent']) // 定義 emit 事件
 </script>
 

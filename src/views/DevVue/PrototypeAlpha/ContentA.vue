@@ -79,7 +79,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 table {
   border: solid 1px #ccc;
   width: 100%;

@@ -10,6 +10,7 @@
 <script setup>
 import { computed } from 'vue'
 import ContentA from '../PrototypeAlpha/ContentA.vue'
+import ContentB from '../PrototypeAlpha/ContentB.vue'
 
 const props = defineProps({
   selected: {
@@ -20,6 +21,7 @@ const props = defineProps({
 
 const componentMap = {
   A: ContentA,
+  B: ContentB
 }
 
 const currentComponent = computed(() => componentMap[props.selected])
