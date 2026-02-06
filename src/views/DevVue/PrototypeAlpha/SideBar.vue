@@ -14,7 +14,7 @@
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'B' }"
           @click.prevent="selectItem('B')">Add New Item</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'C' }"
-          @click.prevent="selectItem('C')">Item 3</a></li>
+          @click.prevent="selectItem('C')">DashBoard</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'D' }"
           @click.prevent="selectItem('D')">Item 4</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'E' }"

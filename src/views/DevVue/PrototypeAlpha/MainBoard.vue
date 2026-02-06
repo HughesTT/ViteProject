@@ -11,6 +11,7 @@
 import { computed } from 'vue'
 import ContentA from '../PrototypeAlpha/ContentA.vue'
 import ContentB from '../PrototypeAlpha/ContentB.vue'
+import ContentC from '../PrototypeAlpha/ContentC.vue'
 
 const props = defineProps({
   selected: {
@@ -21,7 +22,8 @@ const props = defineProps({
 
 const componentMap = {
   A: ContentA,
-  B: ContentB
+  B: ContentB,
+  C: ContentC
 }
 
 const currentComponent = computed(() => componentMap[props.selected])

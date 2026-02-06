@@ -1,5 +1,5 @@
 <template>
-  <div class="dev-list-container">
+  <div class="dev-list-container mb-5">
     <div class="row">
       <!-- Card 1 -->
       <div class="col-md-6 col-lg-4">
@@ -162,20 +162,6 @@
             <div class="dev-card-content">
               <h5 class="dev-card-title">Pinia (Composition)</h5>
               <p class="dev-card-text">狀態管理</p>
-            </div>
-            <div class="dev-card-icon">
-              <span>🚀</span>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      <!-- Card 12 -->
-      <div class="col-md-6 col-lg-4">
-        <router-link to="/boardpage" class="dev-card-link">
-          <div class="dev-card">
-            <div class="dev-card-content">
-              <h5 class="dev-card-title">KanbanBoard</h5>
-              <p class="dev-card-text">簡易版型架構</p>
             </div>
             <div class="dev-card-icon">
               <span>🚀</span>
