@@ -12,7 +12,6 @@
           <VDatePicker ref="Calendar" v-model="selectedDate" :attributes="calendarAttributes" title-position="left"
             expanded @dayclick="onDayClick">
           </VDatePicker>
-          <button class="btn btn-info mt-2" @click="moveToday">Today</button>
           <p>選擇的日期: {{ selectedDate }}</p>
         </div>
         <!-- 右側行程列表 -->
