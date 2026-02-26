@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>VCalendar</h1>
+    <h1>VCalendar 新增 / 編輯行程</h1>
     <div>
       <div class="row">
         <!-- 左側日期欄 -->

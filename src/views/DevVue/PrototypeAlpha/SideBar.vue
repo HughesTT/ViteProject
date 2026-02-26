@@ -16,7 +16,7 @@
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'C' }"
           @click.prevent="selectItem('C')">DashBoard</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'D' }"
-          @click.prevent="selectItem('D')">Item 4</a></li>
+          @click.prevent="selectItem('D')">VCalendar</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'E' }"
           @click.prevent="selectItem('E')">Item 5</a></li>
     </ul>
