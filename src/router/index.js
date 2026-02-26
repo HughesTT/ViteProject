@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import MainBoard from '../views/DevVue/prototypeAlpha/mainBoard.vue'
+import MainBoard from '../views/DevVue/PrototypeAlpha/MainBoard.vue'
 
 const routes = [
   {
