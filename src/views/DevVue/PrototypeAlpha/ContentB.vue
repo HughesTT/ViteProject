@@ -217,6 +217,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  color: #fff;
+  font-weight: bold;
+}
+
 .itmesDataCover {
   color: #999;
   font-size: 1.2em;

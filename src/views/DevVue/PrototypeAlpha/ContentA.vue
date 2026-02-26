@@ -80,6 +80,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  color: #fff;
+  font-weight: bold;
+}
+
 table {
   border: solid 1px #ccc;
   width: 100%;
