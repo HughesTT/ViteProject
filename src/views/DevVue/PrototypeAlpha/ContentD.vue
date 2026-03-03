@@ -130,8 +130,8 @@ import Modal from 'bootstrap/js/dist/modal'
 
 const { showToast } = useToast();
 const Calendar = ref(null); // 綁定 VDatePicker 元件
-const selectedDate = ref(new Date()) // 預設選擇今天
-const eventModal = ref(null)
+const selectedDate = ref(new Date()) // 月曆選定的日期
+const eventModal = ref(null) // 用於控制新增/編輯行程的 modal
 const isEditing = ref(false) // 是否正在編輯或新增行程
 const editingId = ref(null) // 正在編輯的行程 ID
 
@@ -144,8 +144,39 @@ const eventStorage = { // 將行程儲存在 localStorage 中
     localStorage.setItem(STORAGE_KEY, JSON.stringify(events))
   }
 }
-// 定義行程資料結構
+// 定義行程資料為陣列
 const events = ref([])
+
+// 點擊日期
+const onDayClick = (day) => {
+  selectedDate.value = day.date
+}
+
+// 顯示 modal
+const showModal = () => {
+  if (!eventModal.value) { // 如果 modal 實例不存在，則創建一個新的 Modal 實例
+    eventModal.value = new Modal(document.getElementById('eventModal')) // 這裡設定的 modal 的 id 是 'eventModal'
+  }
+  eventModal.value.show()
+}
+const hideModal = () => {
+  eventModal.value?.hide()
+}
+
+// 點選新增行程，開啟新增 modal
+const openAddModal = () => {
+  isEditing.value = false // 編輯狀態設為 false，表示是新增行程
+  currentEvent.value = {
+    title: '',
+    date: formatDate(selectedDate.value), // 未選擇其他日期，將今日日期預設為選定的日期
+    startTime: '09:00', // 預設開始時間
+    endTime: '10:00', // 預設結束時間
+    category: '工作', // 預設分類
+    color: '#3b82f6', // 預設顏色
+    description: '' // 預設說明為空
+  }
+  showModal()
+}
 
 // 目前編輯的行程資料
 const currentEvent = ref({
@@ -173,7 +204,7 @@ const calendarAttributes = computed(() => {
   const attrs = [
     {
       key: 'today',
-      hightlight: {
+      highlight: {
         color: 'red',
         fillMode: 'outline'
       },
@@ -202,44 +233,14 @@ const moveToday = () => {
   selectedDate.value = new Date()
   Calendar.value?.move(new Date())
 }
-// 點擊日期
-const onDayClick = (day) => {
-  selectedDate.value = day.date
-}
-
-// 開啟新增 modal
-const openAddModal = () => {
-  isEditing.value = false
-  currentEvent.value = {
-    title: '',
-    date: formatDate(selectedDate.value),
-    startTime: '09:00',
-    endTime: '10:00',
-    category: '工作',
-    color: '#3b82f6',
-    description: ''
-  }
-  showModal()
-}
-
-// 顯示 modal
-const showModal = () => {
-  if (!eventModal.value) {
-    eventModal.value = new Modal(document.getElementById('eventModal'))
-  }
-  eventModal.value.show()
-}
-const hideModal = () => {
-  eventModal.value?.hide()
-}
 
 // 日期格式化
-const formatDate = (date) => {
-  const d = new Date()
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
+const formatDate = (date) => { // 將日期轉換為 YYYY-MM-DD 格式
+  const d = new Date(date) // 確保日期格式正確
+  const year = d.getFullYear() // 取得年份
+  const month = String(d.getMonth() + 1).padStart(2, '0') // 取得月份，1月份為 0 +1，設定為兩位數，若不足則補零
+  const day = String(d.getDate()).padStart(2, '0') // 取得日期，設定為兩位數，若不足則補零
+  return `${year}-${month}-${day}` // 回傳格式化後的日期字串
 }
 
 // 儲存行程
