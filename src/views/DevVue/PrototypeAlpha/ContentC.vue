@@ -190,11 +190,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: #fff;
-  font-weight: bold;
-}
-
 h3 {
   color: #666;
   font-size: 1.2em;

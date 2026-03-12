@@ -93,6 +93,11 @@ const routes = [
             path: 'piniapagec',
             name: 'PiniaPageComposition',
             component: () => import ( '../views/DevVue/PiniaPageC.vue')
+          },
+          {
+            path: 'fileuploadtype',
+            name: 'FileUploadType',
+            component: () => import ( '../views/DevVue/FileUploadType.vue')
           }
         ]
       },

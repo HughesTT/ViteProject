@@ -16,5 +16,9 @@ import NavBar from '../components/NavBar.vue';
 
 .concept {
   margin-top: 100px;
+
+  h1 {
+    color: #333;
+  }
 }
 </style>

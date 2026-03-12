@@ -169,6 +169,20 @@
           </div>
         </router-link>
       </div>
+      <!-- Card 12 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/fileuploadtype" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">檔案上傳類型</h5>
+              <p class="dev-card-text">檔案管理</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

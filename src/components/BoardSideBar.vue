@@ -5,6 +5,7 @@
       <li><a href="#" @click.prevent="$emit('selectContent', 'B')">Content B</a></li>
       <li><a href="#" @click.prevent="$emit('selectContent', 'C')">Content C</a></li>
       <li><a href="#" @click.prevent="$emit('selectContent', 'D')">Content D</a></li>
+      <li><a href="#" @click.prevent="$emit('selectContent', 'E')">Content E</a></li>
     </ul>
   </div>
 </template>

@@ -18,10 +18,12 @@
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'D' }"
           @click.prevent="selectItem('D')">VCalendar</a></li>
       <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'E' }"
-          @click.prevent="selectItem('E')">Item 5</a></li>
+          @click.prevent="selectItem('E')">FileUpload</a></li>
     </ul>
+    <div class="theme-toggle">
+      <button type="button" class="btn btn-lg btn-info themestylechange" @click="toggleTheme">切換佈景模式</button>
+    </div>
   </div>
-
 </template>
 
 <script setup>
@@ -57,11 +59,17 @@ const logout = () => {
     return
   }
 }
+
+const theme = ref('dark') // 預設主題為 dark
+const toggleTheme = () => {
+  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  document.documentElement.setAttribute('data-theme', theme.value)
+}
 </script>
 
 <style lang="scss">
 .sidebar {
-  border-right: solid 1px #eee;
+  border-right: solid 1px var(--sidebar-border);
   position: sticky;
   top: 0;
   height: 100vh;
@@ -71,7 +79,7 @@ const logout = () => {
     font-weight: 700;
     padding: 15px;
     text-align: center;
-    border-bottom: solid 1px #eee;
+    border-bottom: solid 1px var(--sidebar-title-border);
   }
 
   .logininfo {
@@ -80,7 +88,7 @@ const logout = () => {
     .username {
       font-size: 0.8em;
       font-weight: 300;
-      color: #999;
+      color: var(--username-color);
     }
   }
 
@@ -96,21 +104,29 @@ const logout = () => {
   a {
     display: block;
     padding: 20px 0;
-    color: #fff;
+    color: var(--link-color);
     font-size: 1.2em;
     font-weight: 600;
     text-decoration: none;
     transition: ease-in-out 0.3s;
 
     &:hover {
-      color: #333;
-      background-color: #f0f0f0;
+      color: var(--sidebar-hover-text);
+      background-color: var(--sidebar-hover-bg);
     }
 
     &.active {
-      color: #333;
-      background-color: #999;
+      color: var(--sidebar-active-text);
+      background-color: var(--sidebar-active-bg);
     }
+  }
+
+  .themestylechange {
+    font-size: 0.9em;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>

@@ -313,15 +313,20 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: #fff;
-  font-weight: bold;
+.btn-outline-light {
+  color: var(--btn-outline-light-color);
+  border-color: var(--btn-outline-light-color);
+
+  &:hover {
+    background-color: var(--btn-outline-light-color);
+    color: #fff;
+  }
 }
 
 .calendar-card,
 .events-card,
 .stats-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--events-card-bg);
   border-radius: 12px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
@@ -339,7 +344,7 @@ h1 {
 }
 
 .event-item {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--events-card-bg);
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 0.75rem;
@@ -393,13 +398,13 @@ h1 {
 
 .event-time {
   font-size: 0.9rem;
-  color: #cbd5e1;
+  color: var(--event-time-color);
   margin-bottom: 0.5rem;
 }
 
 .event-desc {
   font-size: 0.85rem;
-  color: #ccc;
+  color: var(--event-desc-color);
   line-height: 1.4;
 }
 

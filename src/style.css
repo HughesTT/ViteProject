@@ -1,10 +1,81 @@
+/* 預設主題：暗色 */
+:root {
+  --bg-color: #333;
+  --text-color: #fff;
+  --sidebar-border: #555;
+  --sidebar-title-border: #555;
+  --sidebar-hover-bg: #555;
+  --sidebar-hover-text: #fff;
+  --sidebar-active-bg: #999;
+  --sidebar-active-text: #333;
+  --link-color: #fff;
+  --username-color: #aaa;
+  --content-title-color: #fff;
+  --btn-outline-light-color: #fff;
+  --events-card-bg: rgba(255, 255, 255, 0.1);
+  --event-time-color: #cbd5e1;
+  --event-desc-color: #ccc;
+  --panel-border: #555;
+  --panel-bg: #444;
+  --panel-title-border: #555;
+  --dropzone-border: #555;
+  --dropzone-hover-bg: #555;
+  --dropzone-hover-border: #777;
+  --filetype-color: #fff;
+  --filetype-border: #999;
+  --table-header-bg: #555;
+  --searchbar-bg: #333;
+  --searchbar-text: #fff;
+  --searchbar-border: #ccc;
+  --datacard-border: #555;
+  --datacard-bg: #666;
+  --datacard-title-color: #fff;
+  --datacard-value-color: #fff;
+}
+
+/* 亮色主題 */
+[data-theme="light"] {
+  --bg-color: #f5f5f5;
+  --text-color: #333;
+  --sidebar-border: #ddd;
+  --sidebar-title-border: #ddd;
+  --sidebar-hover-bg: #e0e0e0;
+  --sidebar-hover-text: #333;
+  --sidebar-active-bg: #bbb;
+  --sidebar-active-text: #111;
+  --link-color: #333;
+  --username-color: #888;
+  --content-title-color: #333;
+  --btn-outline-light-color: #333;
+  --events-card-bg: #ccc;
+  --event-time-color: #555;
+  --event-desc-color: #666;
+  --panel-border: #ddd;
+  --panel-bg: #fff;
+  --panel-title-border: #ddd;
+  --dropzone-border: #ddd;
+  --dropzone-hover-bg: #e0e0e0;
+  --dropzone-hover-border: #bbb;
+  --filetype-color: #333;
+  --filetype-border: #666;
+  --table-header-bg: #ddd;
+  --searchbar-bg: #fff;
+  --searchbar-text: #333;
+  --searchbar-border: #ccc;
+  --datacard-border: #ddd;
+  --datacard-bg: #fff;
+  --datacard-title-color: #333;
+  --datacard-value-color: #333;
+}
+
 body {
   animation: fadeIn 1s ease-in-out;
 }
 
 h1 {
-  color: #2c3e50;
+  color: var(--content-title-color);
   font-size: 2.5rem;
+  font-weight: bold;
   margin-bottom: 1rem;
 }
 

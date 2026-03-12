@@ -34,7 +34,8 @@ onMounted(() => {
   display: flex;
   height: auto;
   min-height: 100vh;
-  background: #333;
-  color: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 </style>
