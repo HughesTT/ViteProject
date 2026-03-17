@@ -1,6 +1,7 @@
 <template>
   <div class="database">
     <Loading v-model:active="isLoading" />
+    <h1>資料搜尋</h1>
     <div class="row justify-content-end search-bar">
       <form class="d-flex col-auto">
         <input v-if="!searchCache" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"

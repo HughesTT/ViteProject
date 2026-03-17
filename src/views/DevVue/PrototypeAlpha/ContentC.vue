@@ -1,29 +1,38 @@
 <template>
   <div>
     <h1 class="mb-5">DashBoard</h1>
+    <div class="row">
+      <!-- vue-chartjs 範例 -->
+      <div class="col-md-6">
+        <div class="chart mb-5">
+          <h3>📊 vue-chartjs - 長條圖</h3>
+          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+        </div>
+      </div>
 
-    <!-- vue-chartjs 範例 -->
-    <div class="chart mb-5">
-      <h3>📊 vue-chartjs - 長條圖</h3>
-      <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
-    </div>
+      <!-- 原生 Chart.js 範例 1: 折線圖 -->
+      <div class="col-md-6">
+        <div class="chart mb-5">
+          <h3>📈 Chart.js - 折線圖</h3>
+          <canvas ref="lineChart"></canvas>
+        </div>
+      </div>
 
-    <!-- 原生 Chart.js 範例 1: 折線圖 -->
-    <div class="chart mb-5">
-      <h3>📈 Chart.js - 折線圖</h3>
-      <canvas ref="lineChart"></canvas>
-    </div>
+      <!-- 原生 Chart.js 範例 2: 圓餅圖 -->
+      <div class="col-md-6">
+        <div class="chart mb-5">
+          <h3>🍰 Chart.js - 圓餅圖</h3>
+          <canvas ref="pieChart"></canvas>
+        </div>
+      </div>
 
-    <!-- 原生 Chart.js 範例 2: 圓餅圖 -->
-    <div class="chart mb-5">
-      <h3>🍰 Chart.js - 圓餅圖</h3>
-      <canvas ref="pieChart"></canvas>
-    </div>
-
-    <!-- 原生 Chart.js 範例 3: 甜甜圈圖 -->
-    <div class="chart mb-5">
-      <h3>🍩 Chart.js - 甜甜圈圖</h3>
-      <canvas ref="doughnutChart"></canvas>
+      <!-- 原生 Chart.js 範例 3: 甜甜圈圖 -->
+      <div class="col-md-6">
+        <div class="chart mb-5">
+          <h3>🍩 Chart.js - 甜甜圈圖</h3>
+          <canvas ref="doughnutChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 </template>

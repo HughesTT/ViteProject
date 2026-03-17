@@ -3,6 +3,8 @@
     <NavBar />
     <div class="vertical-text">my</div>
     <div class="homevue">Vue</div>
+    <div class="journey">Journey</div>
+
   </div>
 </template>
 
@@ -14,7 +16,7 @@ import NavBar from '../components/NavBar.vue';
 @import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap');
 
 .home {
-  margin-top: 100px;
+  margin-top: 6%;
 
   .vertical-text {
     position: absolute;
@@ -31,6 +33,18 @@ import NavBar from '../components/NavBar.vue';
     font-weight: bold;
     font-style: normal;
     font-size: 24rem;
+  }
+
+  .journey {
+    font-family: "Stack Sans Notch", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 5rem;
+    position: absolute;
+    margin-left: 750px;
+    margin-top: -240px;
+    vertical-align: -webkit-baseline-middle;
   }
 }
 </style>
