@@ -51,14 +51,14 @@ import { ref, computed, onMounted, watch, onUnmounted } from 'vue'
 const cssUrl = "https://unpkg.com/todomvc-app-css@2.2.0/index.css";
 const styleId = "todolist-style";
 
-const STORAGE_KEY = 'todo-express'
+const STORAGE_KEY = 'todos-list'
 const todoStorage = {
   fetch() {
     const todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
     todos.forEach(function (todo, index) {
       todo.id = index
     })
-    todoStorage.id = todos.length
+    todoStorage.uid = todos.length
     return todos
   },
   save(todos) {
@@ -66,23 +66,23 @@ const todoStorage = {
   },
   uid: 0
 }
-
+// 依需求顯示全部資料、會篩選出未完成或已完成的資料方法
 const filters = {
   all: (todos) => todos,
   active: (todos) => todos.filter((todo) => !todo.completed),
   completed: (todos) => todos.filter((todo) => todo.completed)
 }
-
 const todos = ref([])
 const visibility = ref('all')
 const filteredTodos = computed(() => filters[visibility.value](todos.value))
-const remaining = computed(() => filters.active(todos.value).length) // 計算未完成的項目數量
+const remaining = computed(() => filters.active(todos.value).length)
 const pluralize = (n) => n === 1 ? 'item' : 'items'
+
 // 1. 新增、刪除
 const newTodo = ref('')
 const addTodo = () => {
   const value = newTodo.value && newTodo.value.trim()
-  if (!value) { return }
+  if (!value) { retrun }
   todos.value.push({
     id: todoStorage.uid++,
     title: value,
@@ -92,32 +92,32 @@ const addTodo = () => {
 }
 
 const removeTodo = (todo) => {
-  const index = todos.value.indexOf(todo)
-  todos.value.splice(index, 1)
+  todos.value.splice(todos.value.indexOf(todo), 1)
 }
-// 2.編輯、取消、完成編輯
-const editedTodo = ref('') // 儲存被編輯的項目
-let beforeEditCache = ref(null) // 額外備份被編輯項目的資料，讓取消編輯時可立即還原
 
-const editTodo = (todo) => { // 點選資料進入編輯狀態
-  editedTodo.value = todo
-  beforeEditCache.value = todo.title
+// 2.編輯、取消、完成編輯
+const editedTodo = ref('')
+let beforeEditCache = null
+
+const editTodo = (todo) => {
+  editedTodo.value = todo // 進入編輯狀態
+  beforeEditCache = todo.title // 將 todo 的值備份
 }
 
 const doneEdit = (todo) => {
   if (!editedTodo.value) { return }
   editedTodo.value = null // 離開編輯狀態
-  todo.title = todo.title.trim()
+  todo.title = todo.title.trim() // 將 todo.title 的值去除空格
   if (!todo.title) {
-    removeTodo(todo)
+    removeTodo()
   }
 }
 
 const cancelEdit = (todo) => {
-  editedTodo.value = null // 離開編輯狀態
-  todo.title = beforeEditCache.value // 還原被編輯前的資料
+  editedTodo.value = null
+  todo.title = beforeEditCache
 }
-// 自定義使用者編輯體驗最佳化
+// 進入編輯狀態時觸發的自動焦點，讓使用者編輯體驗最佳化
 const vTodoFocus = {
   updated(el, binding) {
     if (binding.value) {
@@ -128,27 +128,27 @@ const vTodoFocus = {
 
 // 3. 清除已完成項目、全部勾選及取消勾選
 const removeCompleted = () => {
-  todos.value = filters.active(todos.value)
+  todos.value = filters.active(todos.value) // 留下未完成資料
 }
 
 const allDone = computed({
   get: () => remaining.value === 0,
-  set: (value) => {
-    todos.value.forEach((todo) => todo.completed = value)
-  }
+  set: (value) => todos.value.forEach(todo => todo.completed = value)
 })
 // 將todos 儲存於本機瀏覽器、監聽資料變化
+// watch( object, (nvalue, ovalue)) ，監聽 todos，若資料發生變化，觸發 todoStorage 儲存資料
 watch(
   todos,
   () => {
     todoStorage.save(todos.value)
-  }, { deep: true } // 莫忘深層監聽
+  }, { deep: true }
 )
 
 // 在mounted生命週期，將資料自瀏覽器讀取出來
 onMounted(() => {
   todos.value = todoStorage.fetch()
 
+  // 進入頁面時，新增 CSS 樣式
   if (!document.getElementById(styleId)) { // 防止重複新增樣式
     const link = document.createElement('link'); // 建立 link 元素
     link.id = styleId; // 設定 id 屬性以便後續移除
@@ -157,15 +157,13 @@ onMounted(() => {
     document.head.appendChild(link); // 將 link 元素加入到 head 中
   }
 })
-
+// 離開頁面時，移除 CSS 樣式
 onUnmounted(() => {
   const link = document.getElementById(styleId); // 獲取要移除的 link 元素
   if (link) { // 檢查元素是否存在
     document.head.removeChild(link); // 從 head 中移除 link 元素
   }
 })
-
-// watch( object, (nvalue, ovalue)) ，監聽 todos，若資料發生變化，觸發 todoStorage 儲存資料
 
 </script>
 
