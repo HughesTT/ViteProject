@@ -65,7 +65,7 @@
                   </thead>
                   <tbody>
                     <tr v-if="filteredFiles.length === 0">
-                      <td colspan="7" class="text-center">沒有符合條件的檔案</td>
+                      <td colspan="7" class="text-center">沒有檔案</td>
                     </tr>
                     <tr v-for="file in filteredFiles" :key="file.id">
                       <td>
@@ -74,7 +74,7 @@
                       </td>
                       <td>{{ file.name }}</td>
                       <td><span class="filetype">{{ formatFileType(file.type) }}</span></td>
-                      <td>{{ ((file.size) / 1024).toFixed(2) }} KB</td>
+                      <td>{{ ((file.size) / 1024).toFixed(0) }} KB</td>
                       <td>{{ new Date(file.uploadTime).toLocaleString() }}</td>
                       <td>
                         <button class="btn btn-success btn-sm me-2" @click.prevent="downloadFile(file)">下載</button>

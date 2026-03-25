@@ -1,5 +1,5 @@
 <template>
-  <h1 class="mb-3">Member Data</h1>
+  <h1 class="mb-4">會員資料修改</h1>
   <table>
     <thead>
       <tr>
@@ -28,83 +28,70 @@
 <script setup>
 import Modal from 'bootstrap/js/dist/modal' // 引用 Bootstrap Modal
 import ContentAModal from '../PrototypeAlpha/component/ContentAModal.vue' // 引用設定的 Modal 元件
-import { onMounted, ref } from 'vue'
-import { useToast } from '../../../composables/useToast.js' // 引入 useToast
-const { showToast } = useToast()
-
-const dataA = ref([])
-const selectedMember = ref(null) // 用於存儲被選中的成員資料
-
-const getDataA = () => {
-  fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response) => response.json())
-    .then(json => {
-      dataA.value = json
-    })
-}
+import { ref } from 'vue'
+import { useMembers } from './composable/useMembers.js' // 引入 useMembers
+const { dataA, selectedMember, updateMember, deleteItem } = useMembers()
 
 const modal = ref(null)
 const callModal = (member) => { // 呼叫 Modal 並傳遞成員資料
   selectedMember.value = member // 呼叫同時帶入被選定的 member 資料
   modal.value = new Modal(document.querySelector('.modal'))
-  showModal()
-  // console.log('Member:', member)
-}
-const showModal = () => {
   modal.value.show()
 }
 
 const deleteConfirm = (member) => {
   if (confirm(`確認要刪除 ID: ${member.id}?`)) {
-    deleteItem(member)
-  }
-  // console.log('Delete member:', member)
-}
-
-const deleteItem = (member) => {
-  dataA.value = [...dataA.value].filter(item => item.id !== member.id)
-  showToast(`已刪除 ID: ${member.id}`, 'success')
-}
-
-const updateMember = (updatedMember) => {
-  const index = dataA.value.findIndex(item => item.id === updatedMember.id) // 尋找要更新的資料索引
-  if (index !== -1) { // 確保找到該筆資料
-    dataA.value[index] = { ...updatedMember }
-    showToast(`已更新 ID : ${updatedMember.id}`, 'success')
+    deleteItem(member) // 傳入整個 member 物件
   }
 }
-
-onMounted(() => {
-  getDataA()
-})
 </script>
 
 <style lang="scss" scoped>
 table {
-  border: solid 1px #ccc;
   width: 100%;
   border-collapse: collapse;
+  border: solid 1px var(--panel-border, #555);
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
   tr th {
-    background: #ccc;
+    background: var(--table-header-bg, #555);
     font-weight: 700;
-    color: #666;
-    border-right: solid 1px #666;
+    color: var(--text-color, #fff);
+    border-right: solid 1px var(--panel-border, #666);
 
     &:last-child {
       border-right: none;
     }
   }
 
+  tbody tr {
+    transition: background 0.2s;
+
+    &:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
   th,
   td {
-    border: solid 1px #ccc;
-    padding: 8px;
+    border: solid 1px var(--panel-border, #555);
+    padding: 10px 12px;
     text-align: left;
   }
 
-  button {
-    margin-right: 5px;
+  td:last-child {
+    display: flex;
+    gap: 6px;
+    align-items: center;
   }
 }
 </style>

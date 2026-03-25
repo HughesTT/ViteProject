@@ -4,33 +4,28 @@
       SideBar Title
       <div class="logininfo">
         <div class="username" :username="username">{{ username }} <button type="button" class="btn btn-secondary"
-            @click="logout">登出</button></div>
+            @click="handleLogout">登出</button></div>
       </div>
     </div>
     <ul>
-      <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'A' }"
-          @click.prevent="selectItem('A')">Member
-          Info</a></li>
-      <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'B' }"
-          @click.prevent="selectItem('B')">Add New Item</a></li>
-      <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'C' }"
-          @click.prevent="selectItem('C')">DashBoard</a></li>
-      <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'D' }"
-          @click.prevent="selectItem('D')">VCalendar</a></li>
-      <li><a href="" class="sidebar-link text-center" :class="{ active: isActive === 'E' }"
-          @click.prevent="selectItem('E')">FileUpload</a></li>
+      <li v-for="item in menuItems" :key="item.id">
+        <a href="" class="sidebar-link text-center" :class="{ active: isActive === item.id }"
+          @click.prevent="selectItem(item.id)">{{ item.label }}</a>
+      </li>
+
     </ul>
     <div class="theme-toggle">
-      <button type="button" class="btn btn-lg btn-info themestylechange" @click="toggleTheme">切換佈景模式</button>
+      <button type="button" class="btn btn-lg btn-secondary themestylechange" @click="toggleTheme">切換{{ theme === 'dark'
+        ?
+        '淺色' : '深色' }}背景</button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router' // 引用 Vue Router
-import { useToast } from '../../../composables/useToast.js' // 引入 useToast
-const { showToast } = useToast() // 取得 showToast 函式
+import { useAuth } from '../../DevVue/PrototypeAlpha/composable/useAuth' // 引入 useAuth
+const { logout } = useAuth() // 取得 logout 函式
 
 const props = defineProps({
   username: {
@@ -38,8 +33,17 @@ const props = defineProps({
     required: true
   }
 })
-const router = useRouter() // 使用 Vue Router
-const emit = defineEmits(['selectContent', 'username']) // 定義事件觸發
+const emit = defineEmits(['selectContent', 'username', 'submit']) // 定義事件觸發
+
+// 未來有新增項目只需在 menuItems 陣列中添加對應的 id 與 label 即可，若新增項目較多也可以考慮將 menuItems 抽離成獨立的資料檔案來管理
+const menuItems = [
+  { id: 'A', label: '會員資料修改' },
+  { id: 'B', label: '新增項目' },
+  { id: 'C', label: '資料圖表' },
+  { id: 'D', label: '行事曆' },
+  { id: 'E', label: '檔案管理' }
+]
+
 const isActive = ref(null) // 目前選取的內容
 
 const selectItem = (item) => {
@@ -47,17 +51,9 @@ const selectItem = (item) => {
   emit('selectContent', item)
 }
 
-const logout = () => {
-  const confirmed = window.confirm('確定要登出嗎？')
-  if (confirmed) {
-    // 在這裡處理登出邏輯，例如清除使用者資料、導向登入頁面等
-    router.push('/prototypealpha')
-    showToast('已登出', 'success')
-    emit('username', '') // 清除父組件的 username
-  } else {
-    // 使用者取消登出
-    return
-  }
+const handleLogout = () => {
+  const confirmed = logout()
+  if (confirmed) emit('username', '') // 確認登出後清除父元件的 username
 }
 
 const theme = ref('dark') // 預設主題為 dark

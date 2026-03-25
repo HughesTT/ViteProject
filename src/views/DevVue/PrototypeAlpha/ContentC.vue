@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-5">DashBoard</h1>
+    <h1 class="mb-5">資料圖表</h1>
     <div class="row">
       <!-- vue-chartjs 範例 -->
       <div class="col-md-6">

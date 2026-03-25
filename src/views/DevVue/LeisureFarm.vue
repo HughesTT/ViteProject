@@ -53,7 +53,7 @@ const totalPages = computed(() => {
 })
 onMounted(() => {
   isLoading.value = true
-  setTimeout(() => {
+  setTimeout(() => { // 模擬資料載入時間
     allData.value = LeisureFarm
     isLoading.value = false
   }, 1000)

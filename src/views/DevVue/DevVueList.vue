@@ -183,6 +183,34 @@
           </div>
         </router-link>
       </div>
+      <!-- Card 13 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/progressbar" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">ProgressBar</h5>
+              <p class="dev-card-text">進度條</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
+      <!-- Card 14 -->
+      <div class="col-md-6 col-lg-4">
+        <router-link to="/devconcept/vue/lazyload" class="dev-card-link">
+          <div class="dev-card">
+            <div class="dev-card-content">
+              <h5 class="dev-card-title">Lazy Load</h5>
+              <p class="dev-card-text">延遲載入圖片</p>
+            </div>
+            <div class="dev-card-icon">
+              <span>🚀</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

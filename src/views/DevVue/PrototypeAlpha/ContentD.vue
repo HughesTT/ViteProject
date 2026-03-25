@@ -15,42 +15,8 @@
           <p>選擇的日期: {{ selectedDate }}</p>
         </div>
         <!-- 右側行程列表 -->
-        <div class="col-md-5 mt-5">
-          <div class="events-card">
-            <h3 class="mb-3">
-              {{ selectedDateDisplay }} 的行程
-              <span class="badge bg-info ms-2">
-                {{ selectedDayEvents.length }}
-              </span>
-            </h3>
-            <div class="no-events" v-if="selectedDayEvents.length === 0">沒有安排行程</div>
-            <div class="events-list" v-else>
-              <div class="event-item" v-for="event in selectedDayEvents" :key="event.id"
-                :style="{ borderLeftColr: event.color }">
-                <div class="event-header">
-                  <span class="event-category" :style="{ backgroundColor: event.color }">
-                    {{ event.category }}
-                  </span>
-                  <div class="event-actions">
-                    <button class="btn-icon" @click="editEvent(event)" title="編輯">
-                      ✏️
-                    </button>
-                    <button class="btn-icon" @click="deleteEvent(event)" title="刪除">
-                      🗑️
-                    </button>
-                  </div>
-                </div>
-                <div class="event-title">
-                  {{ event.title }}
-                </div>
-                <div class="event-time">
-                  <i class="bi bi-clock"></i> {{ event.startTime }} - {{ event.endTime }}
-                </div>
-                <div class="event-desc" v-if="event.description">{{ event.description }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <EventList :selectedDate="selectedDate" :events="events" :isEditing="isEditing" :currentEvent="currentEvent"
+          @editEvent="editEvent" @deleteEvent="deleteEvent" />
       </div>
     </div>
     <div class="modal fade" id="eventModal">
@@ -126,6 +92,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useToast } from '../../../composables/useToast.js';
+import EventList from '../../DevVue/PrototypeAlpha/component/EventList.vue';
 import Modal from 'bootstrap/js/dist/modal'
 
 const { showToast } = useToast();
@@ -290,22 +257,6 @@ const deleteEvent = (event) => {
     showToast('行程已刪除', 'success') // 顯示成功訊息
   }
 }
-
-// 顯示選定日期
-const selectedDateDisplay = computed(() => {
-  const date = new Date(selectedDate.value) // 如果選定日期是今天，顯示 "今天"
-  const today = new Date().toDateString() // 將今天的日期轉換為字串格式
-  if (date.toDateString() === today) {
-    return '今天'
-  }
-  return `${date.getMonth() + 1}月${date.getDate()}日` // 否則顯示 "X月X日"
-})
-
-// 選定日期的行程
-const selectedDayEvents = computed(() => {
-  const selected = new Date(selectedDate.value).toDateString() // 篩選出日期相同的行程資料
-  return events.value.filter(e => new Date(e.date).toDateString() === selected).sort((a, b) => a.startTime.localeCompare(b.startTime)) // 將行程資料依照開始時間排序
-})
 
 onMounted(() => {
   events.value = eventStorage.fetch() // 從 localStorage 中讀取行程資料

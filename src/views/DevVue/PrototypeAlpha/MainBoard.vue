@@ -33,9 +33,12 @@ const componentMap = {
 const currentComponent = computed(() => componentMap[props.selected])
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .default-tips {
-  margin-top: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
   color: #999;
   font-size: 1.3em;
 }

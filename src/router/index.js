@@ -98,6 +98,16 @@ const routes = [
             path: 'fileuploadtype',
             name: 'FileUploadType',
             component: () => import ( '../views/DevVue/FileUploadType.vue')
+          },
+          {
+            path: 'progressbar',
+            name: 'ProgressBar',
+            component: () => import ('../views/DevVue/ProgressBar.vue')
+          },
+          {
+            path: 'lazyload',
+            name: 'LazyLoad',
+            component: () => import ('../views/DevVue/LazyLoad.vue')
           }
         ]
       },

@@ -1,60 +1,25 @@
 <template>
-  <h1 class="mb-3">Add New Item</h1>
+  <h1 class="mb-3">新增項目</h1>
   <div class="itmesDataCover" v-if="itemList.length < 1">尚未新增任何項目</div>
   <div class="itemsData mb-5" v-else>
-    <div class="row newitem mb-2" v-for="item in itemList" :key="item.title">
+    <div class="row newitem mb-2" v-for="listItem in itemList" :key="listItem.title">
       <div class="col-md-3 newitem-img">
-        <img :src="item.url" alt="New Member Image" />
+        <img :src="listItem.url" alt="New Member Image" />
       </div>
-      <div class="col-md-2 newitem-title">{{ item.title }}</div>
-      <div class="col-md-4 newitem-des">{{ item.description }}</div>
-      <div class="col-md-2 newitem-price">${{ currency(item.price) }}</div>
+      <div class="col-md-2 newitem-title">{{ listItem.title }}</div>
+      <div class="col-md-4 newitem-des">{{ listItem.description }}</div>
+      <div class="col-md-2 newitem-price">${{ currency(listItem.price) }}</div>
       <div class="col-md-1">
-        <button class="btn btn-secondary btn-sm mb-2" @click.prevent="editItem(item)">編輯</button>
-        <button class="btn btn-danger btn-sm" @click.prevent="deleteItem(item)">刪除</button>
+        <button class="btn btn-secondary btn-sm mb-2" @click.prevent="editItem(listItem)">編輯</button>
+        <button class="btn btn-danger btn-sm" @click.prevent="deleteItem(listItem)">刪除</button>
       </div>
     </div>
   </div>
   <div>
     <div class="col-md-1 addnewitem" @click="toggleForm">+ 新增項目</div>
     <div class="form-area" style="display: none;">
-      <form>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <div class="col-md-12 mb-3">
-              <label for="">標題</label>
-              <input type="text" class="form-control" id="" placeholder="標題" v-model="item.title" />
-            </div>
-            <div class="col-md-12 mb-3">
-              <label for="">價格</label>
-              <input type="text" class="form-control" min="1" id="" placeholder="價格" :value="formatPrice(item.price)"
-                @input="handlePriceInput" />
-            </div>
-          </div>
-          <div class="col-md-5 mb-3">
-            <label for="">圖片連結</label>
-            <input type="text" class="form-control mb-2" id="" placeholder="圖片連結" v-model="item.url" />
-            <label for="">預覽圖</label>
-            <img :src="item.url" alt="Item Image" class="img-fluid" v-if="item.url !== ''" />
-            <img src="https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-260nw-2079504220.jpg"
-              class="img-fluid" v-else />
-          </div>
-          <div class="col-md-12 mb-3">
-            <label for="">說明</label>
-            <textarea rows="3" class="form-control" id="" placeholder="說明文字" v-model="item.description"></textarea>
-          </div>
-          <div class="col-md-12 mb-3">
-            <button type="submit" class="btn btn-primary me-2" @click.prevent="isEditing ? updateItem() : addItem()">
-              {{ isEditing ? '更新' : '增加' }}
-            </button>
-            <button type="reset" class="btn btn-secondary me-2" @click.prevent="clearInput">清除</button>
-            <button type="button" class="btn btn-danger" @click.prevent="cancelEdit">取消</button>
-          </div>
-          <div class="col-md-3">
-
-          </div>
-        </div>
-      </form>
+      <AddItemForm v-model="item" :isEditing="isEditing" @submit="isEditing ? updateItem() : addItem()"
+        @cancel="cancelEdit" @clear="clearInput" />
     </div>
   </div>
 </template>
@@ -63,6 +28,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { useToast } from '../../../composables/useToast.js' // 引入 useToast
 import { currency } from '../../DevVue/methods/filters.js'
+import AddItemForm from '../../DevVue/PrototypeAlpha/component/AddItemForm.vue' // 引入新增項目的表單元件
 const { showToast } = useToast()
 const itemSTORAGE_KEY = 'item-list-prototypealpha' // 定義 localStorage 的 key
 // 宣告 itemStorage 物件，包含 save 與 fetch 方法
@@ -185,22 +151,6 @@ const toggleForm = () => {
   }
 }
 
-// 格式化價格顯示（千分位）
-const formatPrice = (price) => {
-  if (!price) return ''
-  return parseInt(price).toLocaleString('zh-TW')
-}
-
-// 處理價格輸入
-const handlePriceInput = (e) => {
-  // 移除所有非數字符號
-  const value = e.target.value.replace(/[^\d]/g, '')
-  // 更新實際數值
-  item.value.price = value ? parseInt(value) : null
-  // 更新顯示（千分位格式）
-  e.target.value = value ? parseInt(value).toLocaleString('zh-TW') : ''
-}
-
 // 監聽 itemList 的變化並儲存至 localStorage
 watch(
   itemList,
@@ -227,80 +177,87 @@ onMounted(() => {
 
 .itemsData {
   .newitem {
-    background: #eee;
+    background: var(--panel-bg, #444);
     padding: 10px;
     border-radius: 10px;
     overflow: hidden;
+    border: solid 1px var(--panel-border, #555);
+    transition: background 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      background: var(--sidebar-hover-bg, #555);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
 
     .newitem-img {
       overflow: hidden;
 
       img {
         width: 100%;
-        height: auto;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 6px;
       }
     }
 
     .newitem-title {
-      color: #333;
+      color: var(--text-color, #fff);
       font-size: 1.2em;
       font-weight: bold;
     }
 
     .newitem-price {
-      color: #f00;
+      color: #f66;
       font-size: 1.2em;
       font-weight: bold;
       text-align: left;
     }
 
     .newitem-des {
-      color: #666;
+      color: var(--event-desc-color, #ccc);
       font-size: 1em;
       margin-top: 5px;
-      /* 顯示多行 */
       display: -webkit-box;
-      /* 限制行數 (例如4行約等於200個中文字) */
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
-      /* 隱藏溢出內容 */
       overflow: hidden;
-      /* 顯示刪節號 ... */
       text-overflow: ellipsis;
-      /* 可選：設定行高以精確控制行數 */
       max-height: 6em;
-      /* line-height * line-clamp */
     }
   }
 }
 
 .addnewitem {
-  color: #ffe100;
+  color: #60a5fa;
   font-weight: bold;
   cursor: pointer;
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 8px;
   text-align: center;
-  border: solid 1px #ffe100;
+  border: solid 1px #60a5fa;
   border-radius: 15px;
   transition: ease-in-out 0.2s;
+  display: inline-block;
 
   &:hover {
-    background: #ffe100;
-    color: #333;
+    background: #60a5fa;
+    color: #1e293b;
   }
 }
 
 .form-area {
-  color: #333;
+  color: var(--text-color, #fff);
   font-weight: bold;
-  background: #ccc;
+  background: var(--panel-bg, #444);
+  border: solid 1px var(--panel-border, #555);
+  border-radius: 10px;
   padding: 20px;
+  margin-top: 10px;
 
   img {
     width: 100%;
     height: auto;
-    border: solid 1px #999;
+    border: solid 1px var(--panel-border, #555);
     border-radius: 5px;
   }
 }
