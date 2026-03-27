@@ -43,50 +43,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9">
-          <div class="mb-3">
-            <div class="panel">
-              <div class="panel-title">
-                <span>檔案列表</span>
-                <input type="text" class="searchbar form-control form-control-sm" placeholder="🔍"
-                  v-model="searchKeyword">
-              </div>
-              <div class="panel-body p-0">
-                <table class="file-table">
-                  <thead>
-                    <tr>
-                      <th>預覽圖</th>
-                      <th>檔案名稱</th>
-                      <th>類型</th>
-                      <th>檔案大小</th>
-                      <th>時間</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-if="filteredFiles.length === 0">
-                      <td colspan="7" class="text-center">沒有檔案</td>
-                    </tr>
-                    <tr v-for="file in filteredFiles" :key="file.id">
-                      <td>
-                        <img v-if="file.isImage" :src="file.previewUrl" alt="預覽圖" class="img-fluid thumbnail">
-                        <div v-else class="file-icon">{{ fileTypeIcons[file.type] || '📄' }}</div>
-                      </td>
-                      <td>{{ file.name }}</td>
-                      <td><span class="filetype">{{ formatFileType(file.type) }}</span></td>
-                      <td>{{ ((file.size) / 1024).toFixed(0) }} KB</td>
-                      <td>{{ new Date(file.uploadTime).toLocaleString() }}</td>
-                      <td>
-                        <button class="btn btn-success btn-sm me-2" @click.prevent="downloadFile(file)">下載</button>
-                        <button class="btn btn-danger btn-sm" @click.prevent="confirmDelete(file)">刪除</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+        <UploadFileList :allFiles="allFiles" @deleteFile="handleDeleteFile" />
       </div>
     </form>
   </div>
@@ -96,12 +53,13 @@
 import { ref, onMounted, computed } from 'vue'
 import { openDB } from 'idb' // 引入 idb 庫以使用 IndexedDB 功能
 import { useToast } from '../../../composables/useToast.js' // 引入 useToast
+import UploadFileList from '../../DevVue/PrototypeAlpha/component/UploadFileList.vue' // 引用右側檔案List
 
 const { showToast } = useToast() // 取得 showToast 函式
 const fileInput = ref(null) // 用於觸發檔案選擇
 const isDragging = ref(false) // 用於追蹤檔案拖曳狀態
 const isUploading = ref(false) // 用於追蹤檔案上傳狀態
-const searchKeyword = ref('') // 關鍵字搜尋
+
 const allFiles = ref([]) // 含有 preview 的檔案列表
 const uploading = ref({ current: 0, total: 0, percent: 0 }) // 上傳進度狀態
 
@@ -156,13 +114,13 @@ const onDrop = (e) => {
   processFiles(Array.from(e.dataTransfer.files)) // 取得拖曳的檔案並進行上傳處理
 }
 
-// 處理檔案上傳 (模擬上傳流程，實務上這裡會呼叫後端 API)
 // 定義允許上傳的檔案類型，以 MIME 類型為準
 const ALLOWED_TYPES = [
   'image/jpeg', 'image/png', 'image/gif', 'image/webp',
   'application/pdf', 'text/plain', 'application/x-zip-compressed',
   'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
 ]
+// 處理檔案上傳 (模擬上傳流程，實務上這裡會呼叫後端 API) 
 const processFiles = async (files) => {
   if (!files.length) return // 若沒有檔案則直接返回，不進行後續處理
 
@@ -204,48 +162,6 @@ const processFiles = async (files) => {
   await loadFiles() // 上傳完成後重新讀取檔案列表
 }
 
-// 下載檔案
-const downloadFile = (file) => {
-  const link = document.createElement('a') // 建立一個 a 標籤元素
-  link.href = file.downloadUrl // 下載連結為檔案的 downloadUrl，此 URL 是在 loadFiles 時以檔案的二進位資料產生的 ObjectURL
-  link.download = file.name // 設定下載的檔案命名為檔案原始名稱
-  document.body.appendChild(link) // 將連結加入到 DOM 中，才能觸發 click 事件
-  link.click() // 觸發下載
-  document.body.removeChild(link) // 下載完成後移除連結
-}
-
-// 刪除檔案
-const confirmDelete = async (file) => {
-  if (!confirm(`確定要刪除「${file.name}」？`)) return // 顯示確認對話框，若使用者取消則直接返回，不進行刪除
-  const db = await getDB() // 取得資料庫權限
-  await db.delete(STORE, file.id) // 從 IndexedDB 中刪除檔案資料
-  showToast(`已刪除檔案 「${file.name}」`, 'success') // 顯示刪除成功的 Toast 訊息
-  await loadFiles() // 刪除完成後重新讀取檔案列表
-}
-
-// MIME檔案類型重新命名
-const formatFileType = (mime) => {
-  const typeMap = {
-    'image/jpeg': 'JPG',
-    'image/png': 'PNG',
-    'image/gif': 'GIF',
-    'image/webp': 'WEBP',
-    'application/pdf': 'PDF',
-    'text/plain': 'TXT',
-    'application/x-zip-compressed': 'ZIP',
-    'application/msword': 'DOC',
-    'application/vnd.ms-excel': 'XLS',
-    'application/vnd.ms-powerpoint': 'PPT'
-  }
-  return typeMap[mime] || mime // 若 MIME 類型在 typeMap 中有對應的名稱，則使用對應名稱；否則取 MIME 類型的主類別並轉為大寫作為顯示
-}
-
-// 搜尋功能，根據 searchKeyword 過濾檔案列表
-const filteredFiles = computed(() => {
-  if (!searchKeyword.value) return allFiles.value // 若搜尋關鍵字為空，則直接回傳完整檔案列表，不進行過濾
-  return allFiles.value.filter(f => f.name.toLowerCase().includes(searchKeyword.value.toLowerCase())) // 將檔案名稱和搜尋關鍵字都轉為小寫，進行包含關係的比對，回傳符合條件的檔案列表
-})
-
 // 計算所有檔案大小
 const totalFileSize = computed(() =>
   formatBytes(allFiles.value.reduce((acc, file) => acc + file.size, 0))) // 使用 reduce 將所有檔案的大小加總起來，從第一個檔案開始累加，最後回傳總大小，並使用 formatBytes 函式將大小格式化為可讀的字串
@@ -259,18 +175,12 @@ const formatBytes = (bytes) => {
   return `${(bytes / Math.pow(k, i)).toFixed(1)} ${sizes[i]}` // 將數值除以對應單位的基數，並保留一位小數，最後加上單位字串
 }
 
-// 檔案類型圖示
-const fileTypeIcons = {
-  'image/jpeg': '🖼️',
-  'image/png': '🖼️',
-  'image/gif': '🖼️',
-  'image/webp': '🖼️',
-  'application/pdf': '📄',
-  'text/plain': '📄',
-  'application/x-zip-compressed': '📦',
-  'application/msword': '📄',
-  'application/vnd.ms-excel': '📊',
-  'application/vnd.ms-powerpoint': '📈'
+// 接收 UploadFileList emit 的刪除事件，執行實際刪除邏輯
+const handleDeleteFile = async (file) => {
+  const db = await getDB()
+  await db.delete(STORE, file.id)
+  showToast(`已刪除檔案「${file.name}」`, 'success')
+  await loadFiles()
 }
 
 // 元件掛載完成後，載入檔案列表，確保頁面開啟就能看到已上傳的檔案
