@@ -1,6 +1,10 @@
 <template>
   <h1 class="mb-3">新增項目</h1>
-  <div class="itmesDataCover" v-if="itemList.length < 1">尚未新增任何項目</div>
+  <div class="itmesDataCover" v-if="itemList.length < 1">
+    <div class="empty-icon">📦</div>
+    <div class="empty-text">尚未新增任何項目</div>
+    <div class="empty-hint">點擊下方「+ 新增項目」開始建立</div>
+  </div>
   <div class="itemsData mb-5" v-else>
     <div class="row newitem mb-2" v-for="listItem in itemList" :key="listItem.title">
       <div class="col-md-3 newitem-img">
@@ -9,18 +13,20 @@
       <div class="col-md-2 newitem-title">{{ listItem.title }}</div>
       <div class="col-md-4 newitem-des">{{ listItem.description }}</div>
       <div class="col-md-2 newitem-price">${{ currency(listItem.price) }}</div>
-      <div class="col-md-1">
-        <button class="btn btn-secondary btn-sm mb-2" @click.prevent="editItem(listItem)">編輯</button>
+      <div class="col-md-1 newitem-actions">
+        <button class="btn btn-secondary btn-sm" @click.prevent="editItem(listItem)">編輯</button>
         <button class="btn btn-danger btn-sm" @click.prevent="deleteItem(listItem)">刪除</button>
       </div>
     </div>
   </div>
   <div>
     <div class="col-md-1 addnewitem" @click="toggleForm">+ 新增項目</div>
-    <div class="form-area" style="display: none;">
-      <AddItemForm v-model="item" :isEditing="isEditing" @submit="isEditing ? updateItem() : addItem()"
-        @cancel="cancelEdit" @clear="clearInput" />
-    </div>
+    <Transition name="slide-down">
+      <div class="form-area" v-show="showForm">
+        <AddItemForm v-model="item" :isEditing="isEditing" @submit="isEditing ? updateItem() : addItem()"
+          @cancel="cancelEdit" @clear="clearInput" />
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -54,6 +60,7 @@ const item = ref({ // 定義 item 物件來綁定表單資料
 })
 const isEditing = ref(false) // 是否正在編輯
 const editingIndex = ref(-1) // 正在編輯的項目索引
+const showForm = ref(false) // 控制表單顯示/隱藏
 // 新增項目
 const addItem = () => {
   // 驗證表單欄位是否填寫完整
@@ -74,15 +81,10 @@ const editItem = (selectedItem) => {
   isEditing.value = true // 設定為正在編輯狀態
   editingIndex.value = index // 記錄正在編輯的項目索引
   item.value = { ...selectedItem } // 將選取的項目資料複製到 item 物件中
-  // 展開表單區域
-  const formArea = document.querySelector('.form-area')
-  if (formArea.style.display === 'none' || formArea.style.display === '') {
-    formArea.style.display = 'block'
+  if (!showForm.value) {
+    showForm.value = true
     setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
     }, 100)
   }
 }
@@ -131,20 +133,16 @@ const clearInput = () => {
 }
 // 表單區域顯示與隱藏切換
 const toggleForm = () => {
-  const formArea = document.querySelector('.form-area')
-  if (formArea.style.display === 'none' || formArea.style.display === '') {
+  if (!showForm.value) {
     isEditing.value = false
     editingIndex.value = -1
     clearInput()
-    formArea.style.display = 'block'
+    showForm.value = true
     setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
     }, 100)
   } else {
-    formArea.style.display = 'none'
+    showForm.value = false
     isEditing.value = false
     editingIndex.value = -1
     clearInput()
@@ -168,11 +166,26 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .itmesDataCover {
-  color: #999;
-  font-size: 1.2em;
-  font-weight: bold;
   text-align: center;
-  padding: 50px 0;
+  padding: 60px 0;
+  color: #999;
+
+  .empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.6;
+  }
+
+  .empty-text {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+  }
+
+  .empty-hint {
+    font-size: 0.85em;
+    color: #666;
+  }
 }
 
 .itemsData {
@@ -197,6 +210,8 @@ onMounted(() => {
         height: 160px;
         object-fit: cover;
         border-radius: 6px;
+        background: #555; // 圖片載入中或失敗時的底色
+        display: block;
       }
     }
 
@@ -204,6 +219,8 @@ onMounted(() => {
       color: var(--text-color, #fff);
       font-size: 1.2em;
       font-weight: bold;
+      display: flex;
+      align-items: center;
     }
 
     .newitem-price {
@@ -211,6 +228,8 @@ onMounted(() => {
       font-size: 1.2em;
       font-weight: bold;
       text-align: left;
+      display: flex;
+      align-items: center;
     }
 
     .newitem-des {
@@ -223,6 +242,35 @@ onMounted(() => {
       overflow: hidden;
       text-overflow: ellipsis;
       max-height: 6em;
+    }
+
+    // 按鈕欄：flex 縱向排列，垂直置中
+    .newitem-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.4rem;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    // RWD：手機版改為橫向排列
+    @media (max-width: 767px) {
+      .newitem-img img {
+        height: 200px;
+      }
+
+      .newitem-actions {
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-top: 0.5rem;
+
+        .btn {
+          width: auto;
+        }
+      }
     }
   }
 }
@@ -238,10 +286,16 @@ onMounted(() => {
   border-radius: 15px;
   transition: ease-in-out 0.2s;
   display: inline-block;
+  min-width: 120px; // 防止文字在較窄欄位被截斷
+  user-select: none;
 
   &:hover {
     background: #60a5fa;
     color: #1e293b;
+  }
+
+  &:active {
+    transform: scale(0.97);
   }
 }
 
@@ -260,5 +314,17 @@ onMounted(() => {
     border: solid 1px var(--panel-border, #555);
     border-radius: 5px;
   }
+}
+
+// v-show 展開/收合動畫
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slide-down-enter-from,
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>

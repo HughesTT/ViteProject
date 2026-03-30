@@ -4,7 +4,7 @@
       <div class="panel">
         <div class="panel-title">
           <span>檔案列表</span>
-          <input type="text" class="searchbar form-control form-control-sm" placeholder="🔍" v-model="searchKeyword">
+          <input type="text" class="searchbar form-control form-control-sm" placeholder="🔍 搜尋" v-model="searchKeyword">
         </div>
         <div class="panel-body p-0">
           <table class="file-table">

@@ -71,6 +71,7 @@ const selectedDayEvents = computed(() => {
   background: var(--events-card-bg);
   border-radius: 12px;
   padding: 1.5rem;
+  margin-top: 2.3em;
   backdrop-filter: blur(10px);
 }
 

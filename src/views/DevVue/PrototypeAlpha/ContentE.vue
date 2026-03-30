@@ -30,13 +30,13 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="datainfocard mt-3">
-                  <div class="card-title">總檔案數</div>
+                  <div class="card-title">檔案總數</div>
                   <div class="card-value">{{ allFiles.length }}</div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="datainfocard mt-3">
-                  <div class="card-title">總檔案大小</div>
+                  <div class="card-title">檔案總大小</div>
                   <div class="card-value">{{ totalFileSize }}</div>
                 </div>
               </div>

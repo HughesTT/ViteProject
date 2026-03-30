@@ -22,7 +22,7 @@
         <label class="form-label">圖片連結</label>
         <input type="text" class="form-control mb-2" placeholder="圖片連結" :value="modelValue.url"
           @input="update('url', $event.target.value)" />
-        <label class="form-label">預覽圖</label>
+        <label class="form-label">預覽圖</label><br />
         <img :src="modelValue.url" alt="Item Image" class="img-fluid" v-if="modelValue.url" />
         <img src="https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-260nw-2079504220.jpg"
           class="img-fluid" v-else />
